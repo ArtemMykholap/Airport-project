@@ -10,7 +10,7 @@ const FlightBody = () => {
             <div className='transit-string__destination'>Larnaca</div>
             <div className='transit-string__status'>Landed 0:53</div>
             <div className='transit-string__airlines'>
-                <img className='img_style' style='width:60px; padding: 5px;'
+                <img className='img_style' style={{width:'60px', padding:' 5px'}}
                     src='https://api.iev.aero/media/airline/files/5b556c52d6ea7070426218.png' />
                 <span>WizzAir</span>
             </div>
@@ -24,7 +24,7 @@ const FlightBody = () => {
             <div className='transit-string__destination'>Larnaca</div>
             <div className='transit-string__status'>Landed 0:53</div>
             <div className='transit-string__airlines'>
-                <img className='img_style' style='width:60px; padding: 5px;'
+                <img className='img_style' style={{width:'60px', padding:' 5px'}}
                     src='https://api.iev.aero/media/airline/files/5b556c52d6ea7070426218.png' />
                 <span>WizzAir</span>
             </div>
@@ -38,7 +38,7 @@ const FlightBody = () => {
             <div className='transit-string__destination'>Larnaca</div>
             <div className='transit-string__status'>Landed 0:53</div>
             <div className='transit-string__airlines'>
-                <img className='img_style' style='width:60px; padding: 5px;'
+                <img className='img_style' style={{width:'60px', padding:' 5px'}}
                     src='https://api.iev.aero/media/airline/files/5b556c52d6ea7070426218.png' />
                 <span>WizzAir</span>
             </div>
