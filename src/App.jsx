@@ -1,24 +1,21 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import FlightsList from './transits/FlightsList';
-import SearchFieldContainer from './transits/SearchFieldContainer';
-import {createStore} from 'redux';
-import combineReducers from './store/reducer';
-// import store from './store';
-import ButtonSorted from './transits/ButtonSorted';
+import FlightsList from './components/transits/FlightsList';
+import SearchField from './components/transits/SearchField';
+import store from './store';
+import ButtonSorted from './components/transits/ButtonSorted';
 
-const store=createStore(combineReducers)
 
 
 const App = () => {
-    return ( 
+    return (
         <Provider store={store}>
             <div className='page'>
-                <SearchFieldContainer />
-                <ButtonSorted/>
+                <SearchField />
+                <ButtonSorted />
                 <FlightsList />
             </div>
-            </Provider>
+        </Provider>
     );
 };
 

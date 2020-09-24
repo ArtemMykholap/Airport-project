@@ -211,3 +211,25 @@ input::placeholder {
     justify-content: center;
     width: 130px;
 }
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    position: absolute;
+    display: block;
+    left: 46%;
+    top: 70%;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 5px solid #296c84;
+    border-bottom-color: transparent;
+    animation: rotate 1s linear infinite;
+}
