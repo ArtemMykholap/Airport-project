@@ -14,31 +14,40 @@ const FlightBody = ({ flightData, isFetching }) => {
     if (!flightData) {
         return null
     }
+
+    //make array transits today
     const { body: { departure, arrival } } = flightData;
     let transitsToday = departure.filter(date => date.actual.split('T')[0] === currentDate)
         .concat(arrival.filter(date => date.actual.split('T')[0] === currentDate));
 
-    let status=
+
 
     console.log(transitsToday)
     return (
-        transitsToday.map(el => {
+        transitsToday.map(item => {
+            let status = item.status === 'LN' ? 'Landed' : 'Departed';
+            let localTime = item.status === 'LN' ? moment(item.timeArrShedule).format('hh:mm') : moment(item.timeDepShedule).format('hh:mm')
+
             return (<>
-                <div className='transit-string__info' key={el.ID}>
+                <div className='transit-string__info' key={item.ID}>
 
                     <div className='transit-string__terminal'>
-                        <span>{el.term}</span>
+                        <span className='letter'>{item.term}</span>
                     </div>
-                    <div className='transit-string__time'>{moment(el.timeDepShedule).format("h:mm") || moment(el.timeArrShedule).format("h:mm")}</div>
-                    <div className='transit-string__destination'>{el['airportToID.city_en'] || el['airportFromID.city_en']}</div>
-            <div className='transit-string__status'>{el.status}</div>
+                    <div className='transit-string__time'>{localTime}</div>
+                    <div className='transit-string__destination'>
+                        {item['airportToID.city_en'] || item['airportFromID.city_en']}
+                    </div>
+                    <div className='transit-string__status'>
+                        {`${status} ${moment(item.timeLandFact).format('hh:mm')}`}
+                    </div>
                     <div className='transit-string__airlines'>
                         <img className='img_style' style={{ width: '60px', padding: ' 5px' }}
-                            src='https://api.iev.aero/media/airline/files/5b556c52d6ea7070426218.png' />
-                        <span>WizzAir</span>
+                            src={`https://api.iev.aero${item.codeShareData[0].logo}`} />
+                        <span>{item.airline.en.name}</span>
                     </div>
                     <div className='transit-string__transit-number'>
-                        <span>W66260</span></div>
+                        <span>{item.codeShareData[0].codeShare}</span></div>
                 </div>
             </>
             );
