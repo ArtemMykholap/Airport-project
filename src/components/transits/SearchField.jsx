@@ -1,30 +1,34 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import qs from 'qs';
 import * as flightActions from '../transit.actions';
-import {getFlightData} from '../transit.gateway'
+import { useLocation, BrowserRouter, useParams, useHistory } from 'react-router-dom';
+import {flightDataSelector} from '../transit.selectors';
 
+const SearchField = ({ showSpinner, fetchFlightData }) => {
+    const { flightStatus } = useParams()
+    const { search } = useLocation();
+    const searchString = qs.parse(search, { ignoreQueryPrefix: true }).search;
 
+    let history = useHistory();
+    const [searchValue, setFlightSearchText] = useState(searchString)
 
-class SearchField extends Component {
-    state = {
-        flight: '',
+    useEffect(() => {
+        showSpinner();
+        fetchFlightData();
+    }, [])
+
+    const handlerSearchFlight = () => {
+        if (!flightStatus) {
+            history.push({ pathname: '/departures', search: `?search=${searchValue}` });
+        } else {
+            history.push({ ...history, search: `?search=${searchValue}` });
+        }
     }
 
-    onChange = event => {
-        this.setState({ flight: event.target.value })
-    }
 
-    handleGetFlight = () => {  
-        this.props.showSpinner();
-        getFlightData(this.state.flight)
-        .then(flightData=>{
-            this.props.flightDataRecieved(flightData)
-        })
-    }
-
-    render() {
-        return (
+    return (<>
+        <BrowserRouter>
             <div className='container-header'>
                 <div className='title-header'>SEARCH FLIGHT</div>
                 <div className='search-transit'>
@@ -35,25 +39,25 @@ class SearchField extends Component {
                         }}></i>
                     </div>
                     <input placeholder='Airline, destination or flight #'
-                        onChange={this.onChange}
-                        value={this.state.flight} />
-                    <button  className='search-button' onClick={this.handleGetFlight}>SEARCH</button>
-             
+                        onChange={event => setFlightSearchText(event.target.value)}
+                        value={searchValue} />
+                    <button className='search-button' onClick={handlerSearchFlight}>SEARCH</button>
                 </div>
             </div>
-        )
+        </BrowserRouter>
+    </>
+    )
+}
+
+const mapState = state => {
+    return {
+        flightData: flightDataSelector(state)
     }
 }
 
-
-SearchField.propTypes={
-    showSpinner:PropTypes.func.isRequired,
-    // flightDataRecived:PropTypes.func.isRequired,
+const mapDispatch = {
+    showSpinner: flightActions.showSpinner,
+    fetchFlightData: flightActions.fetchFlightData,
 }
 
-const mapDispatch={
-    showSpinner:flightActions.showSpinner,
-    flightDataRecieved: flightActions.flightDataRecieved,
-}
-
-export default connect(null,mapDispatch) (SearchField)
+export default connect(mapState, mapDispatch)(SearchField)

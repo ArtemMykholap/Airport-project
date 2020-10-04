@@ -77,14 +77,12 @@ input::placeholder {
     margin: 20px 50px 0px;
 }
 
-.departures {
+.button-sorted-transits {
     display: flex;
     align-items: center;
-    /* top: 27px; */
-    /* left: 100px; */
     height: 60px;
     cursor: pointer;
-    width: 710px;
+    width: 581px;
     text-transform: uppercase;
     border: 0;
     position: relative;
@@ -92,48 +90,39 @@ input::placeholder {
     border-radius: 70px 70px 0 0;
     transition: .3s ease-in-out;
     outline: none;
-    background: #73d2f0;
+    background: #fff;
     overflow: hidden;
 }
 
-.departures__text {
-    left: 300px;
+.button-sorted-transits__text {
+    left: 40%;
     position: relative;
     font-size: 24px;
     font-weight: 500;
+    color: #73d2f0;
+}
+
+.button-sorted-transits.active .button-sorted-transits__text {
     color: #fff;
 }
 
-.arrivals__text {
-    right: -100px;
-    position: relative;
-    font-size: 24px;
-    font-weight: 500;
-    color: #73d2f0;
-}
-
-.arrivals {
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    /* top: 27px; */
-    height: 60px;
-    cursor: pointer;
-    width: 710px;
-    text-transform: uppercase;
-    border: 0;
-    position: relative;
-    font-weight: 600;
-    border-radius: 70px 70px 0 0;
-    transition: .3s ease-in-out;
-    outline: none;
-    color: #73d2f0;
-    background: #ffffff;
-    overflow: hidden;
+.button-sorted-transits.active {
+    background-color: #73d2f0;
 }
 
 
 /* transit */
+
+a {
+    text-decoration: none;
+}
+
+.no-flight {
+    display: flex;
+    margin: 100px;
+    font-size: 60px;
+    justify-content: center;
+}
 
 .transit-string {
     background: #ffffff;
@@ -143,45 +132,34 @@ input::placeholder {
     margin-top: -59px;
     height: 150px;
     margin-left: 50px;
-    width: 1164px;
+    margin-right: 50px;
     color: grey;
     justify-content: space-around;
 }
 
-.transit-string__header__1 {
-    margin-left: 12px;
+.transit-string__header {
     padding-bottom: 10px;
-    width: 10%;
-}
-
-.transit-string__header__2 {
-    margin-left: -7px;
-    padding-bottom: 10px;
-    width: 10%;
-}
-
-.transit-string__header__3 {
-    padding-bottom: 10px;
-    width: 20%;
 }
 
 .transit-string__info {
     display: flex;
     height: 72px;
-    background-color: #e7f2fc;
-    margin-left: 50px;
-    align-items: center;
-}
-
-.transit-string__info1 {
-    display: flex;
-    align-items: center;
-    height: 72px;
     background-color: #fff;
     margin-left: 50px;
+    margin-right: 50px;
+    align-items: center;
 }
 
-.transit-string__terminal {
+.transit-string__info:nth-child(even) {
+    background-color: #e7f2fc;
+}
+
+.container-list {
+    width: 1164px;
+}
+
+.transit-string__terminal,
+.transit-string__header__1 {
     display: flex;
     width: 10%;
     text-align: center;
@@ -199,16 +177,16 @@ input::placeholder {
     font-size: 22px;
 }
 
-.transit-string__time {
+.transit-string__time,
+.transit-string__header__2 {
     width: 10%;
     text-align: left;
 }
 
-.transit-string__destination {
+.transit-string__destination,
+.transit-string__header__3 {
     width: 20%;
     text-align: left;
-    // width: 240px;
-    // text-align: left;
 }
 
 .transit-string__status {
@@ -216,14 +194,15 @@ input::placeholder {
     text-align: left;
 }
 
-.transit-string__airlines {
+.transit-string__airlines,
+.transit-string__header__4 {
     width: 20%;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
-.transit-string__transit-number {
+.transit-string__transit-number,
+.transit-string__header__5 {
     width: 20%;
     display: flex;
     justify-content: center;

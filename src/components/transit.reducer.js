@@ -1,4 +1,4 @@
-import { SHOW_SPINNER, FLIGHT_DATA_RECIEVED } from './transit.actions'
+import { SHOW_SPINNER, FLIGHT_DATA_RECIEVED, } from './transit.actions'
 
 const initialState = {
     isFetching: false,
@@ -6,7 +6,6 @@ const initialState = {
 };
 
 const flightsReducer = (state = initialState, action) => {
-    // console.log(state)
     switch (action.type) {
         case SHOW_SPINNER:
             return {
@@ -19,7 +18,6 @@ const flightsReducer = (state = initialState, action) => {
                 flightData: action.payload.flightData,
                 isFetching: false
             }
-
         default:
             return state;
     }

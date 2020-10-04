@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Spinner = (props) => {
+const Spinner = () => {
     return (<span className="spinner" ></span>);
 }
 
