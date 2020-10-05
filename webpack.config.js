@@ -12,7 +12,7 @@ module.exports = (env, argv) => {
         output: {
             filename: "bundle.js",
             publicPath: '/',
-            path: __dirname + '/review_build'
+            path: __dirname + '/build'
 
         },
         module: {
