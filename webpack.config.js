@@ -1,16 +1,19 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
+
 const webpack = require("webpack");
+
 module.exports = (env, argv) => {
     const isProduction = argv.mode === "production";
     const config = {
-        entry: "./src/index.jsx",
+        entry: "./src/index.js",
         output: {
-            path: __dirname + '/build',
             filename: "bundle.js",
             publicPath: '/',
+            path: __dirname + '/review_build'
+
         },
         module: {
             rules: [{
@@ -20,14 +23,12 @@ module.exports = (env, argv) => {
                 {
                     test: /.s?css$/,
                     use: [
-                        isProduction ?
-                        MiniCssExtractPlugin.loader :
-                        "style-loader",
+                        isProduction ? MiniCssExtractPlugin.loader : "style-loader",
                         "css-loader",
-                        "sass-loader",
+                        "sass-loader"
                     ]
                 }
-            ],
+            ]
         },
         plugins: [
             new webpack.ProgressPlugin(),
@@ -36,7 +37,9 @@ module.exports = (env, argv) => {
                 template: "./src/index.html"
             }),
             new CopyPlugin({
-                patterns: [{ from: "_redirects", to: "" }],
+                patterns: [
+                    { from: '_redirects', to: '' },
+                ],
             }),
         ],
         resolve: {
@@ -44,14 +47,18 @@ module.exports = (env, argv) => {
         },
         devServer: {
             hot: true,
-            port: 8081,
+            port: 8000,
             historyApiFallback: true,
         }
     };
+
     if (isProduction) {
-        config.plugins.push(new MiniCssExtractPlugin({
-            filename: "[name].css",
-        }));
+        config.plugins.push(
+            new MiniCssExtractPlugin({
+                filename: "[name].css"
+            })
+        );
     }
+
     return config;
 };
