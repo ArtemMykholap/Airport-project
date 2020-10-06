@@ -41,6 +41,7 @@ const FlightBody = ({ transitsToday }) => {
                     <div className='transit-string__terminal' >
                         <span className='letter'>{item.term}</span>
                     </div>
+                    {/* .. */}
                     <div className='transit-string__time'>{localTime}</div>
                     <div className='transit-string__destination'>
                         {item['airportToID.city_en'] || item['airportFromID.city_en']}
